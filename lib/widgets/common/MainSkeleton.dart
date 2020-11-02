@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+import 'AboutDashboard.dart';
+import 'UserInfo.dart';
+
 
 class MainSkeleton extends StatelessWidget {
   final Widget body;
@@ -38,31 +41,22 @@ class MainSkeleton extends StatelessWidget {
 }
 
 class MainDrawer extends StatelessWidget {
+
+  const MainDrawer({
+    Key key,
+  }) : super(key: key);
+
   @override
   Widget build(BuildContext context) =>
       Drawer(
         child: ListView(
           padding: EdgeInsets.zero,
           children: <Widget>[
-            UserAccountsDrawerHeader(
-              accountName: Text("Angel Cervera Claudio"),
-              accountEmail: Text("angelcervera@silyan.com"),
-              currentAccountPicture: CircleAvatar(
-                backgroundColor: Theme
-                    .of(context)
-                    .platform == TargetPlatform.iOS
-                    ? Colors.blue
-                    : Colors.white,
-                child: Text(
-                  "A",
-                  style: TextStyle(fontSize: 40.0),
-                ),
-              ),
-            ),
+            UserInfo(),
             ListTile(
               leading: Icon(Icons.access_time),
               title: Text('Welcome 1'),
-              onTap: () => Navigator.pushNamedAndRemoveUntil(context, "/welcome/1", ModalRoute.withName('/'))
+              onTap: () => Navigator.pushNamedAndRemoveUntil(context, "/welcome/1", (Route<dynamic> route) => route.settings.name == '/')
             ),
             ListTile(
               leading: Icon(Icons.access_time),
@@ -73,18 +67,15 @@ class MainDrawer extends StatelessWidget {
               leading: Icon(Icons.settings),
               title: Text('Settings'),
             ),
-            AboutListTile(
-              icon: Icon(Icons.info),
-              applicationIcon: FlutterLogo(),
-              applicationName: 'Dashboard example',
-              applicationVersion: 'November 2020',
-              applicationLegalese: '\u{a9} 2020 Simplexportal Ltd',
-              // aboutBoxChildren: aboutBoxChildren,
-            )
+            AboutDashboard()
           ],
         ),
       );
 }
+
+
+
+
 
 
 
